@@ -1,43 +1,32 @@
 {{define "content"}}
 	<div class="row categories">
 		<div class="columns small-10 small-offset-1">
-			<div class="row category orient-left">
-				<a href="/shop_details">
-					<div class="columns small-4">
-						<img src="/img/logo.png" alt="logo" />
-					</div>
+			{{range .Categories}}
+			<div class="row category {{if eq .IsOrientRight true}}
+											orient-right
+										{{else}}
+											orient-left
+										{{end}}">
+				<a href="{{.URL}}">
+					{{if eq .IsOrientRight false}}
+						<div class="columns small-4">
+							<img src="/img/{{.ImageURL}}" alt="{{.ImageURL"}} />
+						</div>
+					{{end}}
+
 					<div class="columns small-8">
-						<h2>Shop Shirts</h2>
-						<p>Explore our wide assortment of juices and mixes expected by
-							today's lemonade stand clientelle. Now featuring a full line of
-							organic juices that are guaranteed to be obtained from trees that
-							have never been treated with pesticides or artificial
-							fertilizers.</p>
+						<h2>{{.Title}}</h2>
+						<p>{{.Description}}</p>
 					</div>
-				</a>
+					
+					{{if eq .IsOrientRight true}}
+						<div class="columns small-4">
+							<img src="/img/{{.ImageURL}}" alt="{{.ImageURL}}" />
+						</div>
+					{{end}}
+ 				</a>
 			</div>
-			<div class="row category orient-right">
-				<div class="columns small-8">
-					<h2>Shop Signs & Advertising</h2>
-					<p>From paper cups to bio-degradable plastic to straws and
-						napkins, LSS is your source for the sundries that keep your stand
-						running smoothly.</p>
-				</div>
-				<div class="columns small-4">
-					<img src="/img/sign.png" alt="poster" />
-				</div>
-			</div>
-			<div class="row category orient-left">
-				<div class="columns small-4">
-					<img src="/img/create.png" alt="pencil paper" />
-				</div>
-				<div class="columns small-8">
-					<h2>Create Your Own</h2>
-					<p>Sure, you could just wait for people to find your stand
-						along the side of the road, but if you want to take it to the next
-						level, our premium line of advertising supplies.</p>
-				</div>
-			</div>
+			{{end}}
 		</div>
 	</div>
 	{{end}}
