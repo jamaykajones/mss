@@ -3,27 +3,15 @@ package main
 import (
 	"html/template"
 	"io/ioutil"
-	"log"
 	"net/http"
 	"os"
+
+	"github.com/jamaykajones/mss/webapp/controller"
 )
 
 func main() {
 	templates := populateTemplates()
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) { //handles every URL in app
-		requestedFile := r.URL.Path[1:]       //slicing off 1st char ("/")
-		t := templates[requestedFile+".html"] // adds .html so user doesn't have to
-		if t != nil {
-			err := t.Execute(w, nil)
-			if err != nil {
-				log.Println(err)
-			}
-		} else {
-			w.WriteHeader(http.StatusNotFound) // template not found
-		}
-	})
-	http.Handle("/img/", http.FileServer(http.Dir("public")))
-	http.Handle("/css/", http.FileServer(http.Dir("public")))
+	controller.Startup(templates)
 	http.ListenAndServe(":8000", nil)
 }
 
