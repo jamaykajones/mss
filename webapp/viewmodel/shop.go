@@ -11,6 +11,7 @@ type Category struct { //vm
 	ImageURL    string
 	Title       string
 	Description string
+	IsOrientRight bool
 }
 
 func NewShop() Shop { // constructor func
@@ -27,6 +28,7 @@ func NewShop() Shop { // constructor func
 						organic juices that are guaranteed to be obtained from trees that
 						have never been treated with pesticides or artificial
 						fertilizers.`,
+		IsOrientRight: false,
 	}
 	adCategory := Category{
 		URL:      ".",
@@ -35,6 +37,7 @@ func NewShop() Shop { // constructor func
 		Description: `From paper cups to bio-degradable plastic to straws and
 						napkins, LSS is your source for the sundries that keep your stand
 						running smoothly.`,
+		IsOrientRight: true,						
 	}
 	createCategory := Category{
 		URL:      ".",
@@ -43,6 +46,7 @@ func NewShop() Shop { // constructor func
 		Description: `Sure, you could just wait for people to find your stand
 						along the side of the road, but if you want to take it to the next
 						level, our premium line of advertising supplies.`,
+		IsOrientRight: false,						
 	}
 	result.Categories = []Category{shirtCategory, adCategory, createCategory}
 	return result
