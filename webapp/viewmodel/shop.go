@@ -1,5 +1,11 @@
 package viewmodel
 
+import (
+	"fmt"
+
+	"github.com/jamaykajones/mss/webapp/model"
+)
+
 type Shop struct { //vm
 	Title      string
 	Active     string
@@ -7,47 +13,32 @@ type Shop struct { //vm
 }
 
 type Category struct { //vm
-	URL         string
-	ImageURL    string
-	Title       string
-	Description string
+	URL           string
+	ImageURL      string
+	Title         string
+	Description   string
 	IsOrientRight bool
 }
 
-func NewShop() Shop { // constructor func
+func NewShop(categories []model.Category) Shop { // constructor func
 	result := Shop{ // returns shop vm
 		Title:  "Meme Shirt Supply - Shop",
 		Active: "shop",
 	}
-	shirtCategory := Category{
-		URL:      "/shop_details",
-		ImageURL: "logo.png",
-		Title:    "Shop Shirts",
-		Description: `Explore our wide assortment of juices and mixes expected by
-						today's lemonade stand clientelle. Now featuring a full line of
-						organic juices that are guaranteed to be obtained from trees that
-						have never been treated with pesticides or artificial
-						fertilizers.`,
-		IsOrientRight: false,
+	result.Categories = make([]Category, len(categories))
+	for i := 0; i < len(categories); i++ {
+		vm := categorytoVM(categories[i])
+		vm.IsOrientRight = i%2 == 1
+		result.Categories[i] = vm
 	}
-	adCategory := Category{
-		URL:      ".",
-		ImageURL: "sign.png",
-		Title:    "Shop Signs & Advertising",
-		Description: `From paper cups to bio-degradable plastic to straws and
-						napkins, LSS is your source for the sundries that keep your stand
-						running smoothly.`,
-		IsOrientRight: true,						
-	}
-	createCategory := Category{
-		URL:      ".",
-		ImageURL: "create.png",
-		Title:    "Create Your Own",
-		Description: `Sure, you could just wait for people to find your stand
-						along the side of the road, but if you want to take it to the next
-						level, our premium line of advertising supplies.`,
-		IsOrientRight: false,						
-	}
-	result.Categories = []Category{shirtCategory, adCategory, createCategory}
 	return result
+}
+
+func categorytoVM(c model.Category) Category {
+	return Category{
+		URL:         fmt.Sprintf("/shop/%v", c.ID),
+		ImageURL:    c.ImageURL,
+		Title:       c.Title,
+		Description: c.Description,
+	}
 }

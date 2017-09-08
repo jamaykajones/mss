@@ -1,168 +1,22 @@
 {{define "content"}}
-	<div class="row products">
+	<div class="row">
 		<div class="columns small-12">
 			<div class="row">
-
-				<div class="columns small-3 product">
-					<img src="/img/awsm.jpg" alt="awsm" />
-					<a href="/shop_detail">
-						<h3>Awesome Shirt</h3>
-					</a>
-					<p>
-						Cotton. Grey. S / M / L / XL
-					</p>
-					<p>
-						$19.99 / liter
-					</p>
-				</div>
-
-				<div class="columns small-3 product">
-					<img src="/img/fat.jpg" alt="fat" />
-					<a href=".">
-						<h3>Fat Shirt</h3>
-					</a>
-					<p>
-						Cotton. Grey. S / M / L / XL
-					</p>
-					<p>
-						$0.89 / liter
-					</p>
-				</div>
-
-				<div class="columns small-3 product">
-					<img src="/img/hstg.jpg" alt="hstg" />
-					<a href=".">
-						<h3>Hashtag Shirt</h3>
-					</a>
-					<p>
-						Cotton. Black. S / M / L / XL
-					</p>
-					<p>
-						$3.99 / liter
-					</p>
-				</div>
-
-				<div class="columns small-3 product">
-					<img src="/img/ki_.jpg" alt="ki_" />
-					<a href=".">
-						<h3>Ki_ _ Shirt</h3>
-					</a>
-					<p>
-						Cotton. White. S / M / L / XL
-					</p>
-					<p>
-						$5.99 / liter
-					</p>
-				</div>
-			</div>
-			<div class="row">
-
-				<div class="columns small-3 product">
-					<img src="/img/pacca.jpg" alt="pacca" />
-					<a href=".">
-						<h3>Pacca Shirt</h3>
-					</a>
-					<p>
-						Cotton. White. S / M / L / XL
-					</p>
-					<p>
-						$6.87 / liter
-					</p>
-				</div>
-
-				<div class="columns small-3 product">
-					<img src="/img/pls.jpg" alt="pls" />
-					<a href=".">
-						<h3>Please Shirt</h3>
-					</a>
-					<p>
-						Cotton. Blue. S / M / L / XL
-					</p>
-					<p>
-						$1.67 / liter
-					</p>
-				</div>
-				
-				<div class="columns small-3 product">
-					<img src="/img/shrg.jpg" alt="shrg" />
-					<a href=".">
-						<h3>Shrug Shirt</h3>
-					</a>
-					<p>
-						Cotton. White. S / M / L / XL
-					</p>
-					<p>
-						$2.48 / liter
-					</p>
-				</div>
-
-				<div class="columns small-3 product">
-					<img src="/img/sw.jpg" alt="sw" />
-					<a href=".">
-						<h3>Star Wars Shirt</h3>
-					</a>
-					<p>
-						Cotton. Black. S / M / L / XL
-					</p>
-					<p>
-						$4.36 / liter
-					</p>
-				</div>
-			</div>
-			<div class="row">
-					
-				<div class="columns small-3 product">
-					<img src="/img/taco.jpg" alt="taco" />
-					<a href=".">
-						<h3>Taco Shirt</h3>
-					</a>
-					<p>
-						Cotton. Black. S / M / L / XL
-					</p>
-					<p>
-						$6.87 / liter
-					</p>
-				</div>
-
-				<div class="columns small-3 product">
-					<img src="/img/time.jpg" alt="time" />
-					<a href=".">
-						<h3>Please Shirt</h3>
-					</a>
-					<p>
-						Cotton. Tan. S / M / L / XL
-					</p>
-					<p>
-						$1.67 / liter
-					</p>
-				</div>
-				
-				<div class="columns small-3 product">
-					<img src="/img/wf.jpg" alt="wifi" />
-					<a href=".">
-						<h3>Wifi Shirt</h3>
-					</a>
-					<p>
-						Cotton. Black / White. S / M / L / XL
-					</p>
-					<p>
-						$2.48 / liter
-					</p>
-				</div>
-
-				<div class="columns small-3 product">
-					<img src="/img/e.e.jpg" alt="challenge" />
-					<a href=".">
-						<h3>Challenge Shirt</h3>
-					</a>
-					<p>
-						Cotton. White. S / M / L / XL
-					</p>
-					<p>
-						$4.36 / liter
-					</p>
-				</div>
+				<div class="columns small-12">
+					<ul class="row products small-block-grid-4">
+						{{range .Products}}
+						<li class="product">
+							<img src="/img/{{.ImageURL}}" alt="{{.ImageURL}}" />
+							<a href="/products/{{.ID}}">
+								<h3>{{.Name}}</h3>
+							</a>
+							<p>{{.Material}}</p>
+							<p>${{.Price | printf "%.2f"}}</p>
+						</li>
+						{{end}}
+					</ul>
+				</div>				
 			</div>
 		</div>
 	</div>
-	{{end}}
+{{end}}
